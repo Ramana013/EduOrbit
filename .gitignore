@@ -1,0 +1,24 @@
+# Python cache
+*.pyc
+__pycache__/
+
+# Django DB and media
+*.log
+db.sqlite3
+/media/
+
+# Env files
+.env
+venv/
+env/
+
+# Django migrations
+*/migrations/
+!*/migrations/__init__.py
+
+# IDE/editor folders
+.vscode/
+.idea/
+
+# System files
+.DS_Store
