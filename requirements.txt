@@ -1,0 +1,10 @@
+crispy-bootstrap4==2024.10
+django-crispy-forms==2.3
+django-recaptcha==4.0.0
+python-dateutil==2.9.0.post0
+python-dotenv==1.0.1
+mysql-connector-python==9.0.0
+mysqlclient==2.2.4
+pillow==10.4.0
+razorpay==1.4.2
+setuptools

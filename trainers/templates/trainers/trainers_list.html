@@ -1,0 +1,37 @@
+{% extends 'trainers/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h4>Admin Home / Plan / Trainers / Trainer</h4>
+    <a href="{% url 'trainers:add_trainer' %}" class="btn btn-primary mt-3">Add New Trainer</a>
+    <hr>
+    <div class="table-responsive">
+        <table class="table table-bordered mt-3">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Title</th>
+                    <th>Email</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for trainer in trainers %}
+                <tr>
+                    <td>{{ trainer.name }}</td>
+                    <td>{{ trainer.title }}</td>
+                    <td>{{ trainer.email }}</td>
+                    <td>{{ trainer.status }}</td>
+                    <td>
+                        <!-- Add edit, delete buttons or links as needed -->
+                        <a href="#" class="btn btn-sm btn-warning">Edit</a>
+                        <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

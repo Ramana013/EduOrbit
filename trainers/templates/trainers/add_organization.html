@@ -1,0 +1,30 @@
+{% extends 'trainers/base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h4>Add Organization</h4>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <label>Full Name*</label>
+            {{ form.full_name }}
+        </div>
+        <div class="form-group">
+            <label>Short Name*</label>
+            {{ form.short_name }}
+        </div>
+        <div class="form-group">
+            <label>From Year*</label>
+            {{ form.from_year }}
+        </div>
+        <div class="form-group">
+            <label>To Year (0 for present)*</label>
+            {{ form.to_year }}
+        </div>
+        <div class="form-group form-check">
+            {{ form.status }}
+            <label class="form-check-label">Active</label>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Add New Organization</button>
+    </form>
+</div>
+{% endblock %}

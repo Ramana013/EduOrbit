@@ -1,0 +1,167 @@
+{% extends 'trainers/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="form-container">
+    <h1>Trainer Information Form</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label class="required">Name:</label>
+            {{ form.name|as_widget(attrs={'class': 'form-control'}) }}
+        </div>
+
+        <div class="form-group">
+            <label class="required">Title:</label>
+            {{ form.title|as_widget(attrs={'class': 'form-control'}) }}
+        </div>
+
+        <div class="form-group">
+            <label class="required">Bio:</label>
+            {{ form.bio|as_widget(attrs={'class': 'form-control', 'rows': '4'}) }}
+        </div>
+
+        <div class="form-group">
+            <label class="required">Date of Birth:</label>
+            {{ form.dob|as_widget(attrs={'class': 'form-control', 'type': 'date'}) }}
+        </div>
+
+        <div class="form-group">
+            <label class="required">Experience (years):</label>
+            {{ form.experience|as_widget(attrs={'class': 'form-control', 'step': '0.1'}) }}
+        </div>
+
+        <div class="form-group">
+            <label>Rating (1-5):</label>
+            {{ form.rating|as_widget(attrs={'class': 'form-control', 'min': '1', 'max': '5'}) }}
+        </div>
+
+        <div class="form-group">
+            <label>Profile Picture:</label>
+            {{ form.profile_pic|as_widget(attrs={'class': 'form-control'}) }}
+        </div>
+
+        <div class="form-group">
+            <label>Prior Batches:</label>
+            {{ form.prior_batches|as_widget(attrs={'class': 'form-control'}) }}
+        </div>
+
+        <div class="form-group">
+            <label>Prior Aspirants:</label>
+            {{ form.prior_aspirants|as_widget(attrs={'class': 'form-control'}) }}
+        </div>
+
+        <div class="form-group">
+            <label>Prior Weekly Tests:</label>
+            {{ form.prior_weekly_tests|as_widget(attrs={'class': 'form-control'}) }}
+        </div>
+
+        <!-- Courses to Train -->
+        <div class="form-group">
+            <label>Courses to Train:</label>
+            {{ form.courses_to_train|as_widget(attrs={'class': 'form-control', 'id': 'id_courses_to_train'}) }}
+            <div id="other_courses_field" class="other-field">
+                {{ form.other_courses_to_train|as_widget(attrs={'class': 'form-control', 'placeholder': 'Specify Other
+                Courses'}) }}
+            </div>
+        </div>
+
+        <!-- Qualifications -->
+        <div class="form-group">
+            <label>Qualifications:</label>
+            {{ form.qualifications|as_widget(attrs={'class': 'form-control', 'id': 'id_qualifications'}) }}
+            <div id="other_qualifications_field" class="other-field">
+                {{ form.other_qualifications|as_widget(attrs={'class': 'form-control', 'placeholder': 'Specify Other
+                Qualifications'}) }}
+            </div>
+        </div>
+
+        <!-- Awards -->
+        <div class="form-group">
+            <label>Awards:</label>
+            {{ form.awards|as_widget(attrs={'class': 'form-control', 'id': 'id_awards'}) }}
+            <div id="other_awards_field" class="other-field">
+                {{ form.other_awards|as_widget(attrs={'class': 'form-control', 'placeholder': 'Specify Other Awards'})
+                }}
+            </div>
+        </div>
+
+        <!-- IT Experience -->
+        <div class="form-group">
+            <label>IT Experience:</label>
+            {{ form.it_experience|as_widget(attrs={'class': 'form-control', 'id': 'id_it_experience'}) }}
+            <div id="other_it_experience_field" class="other-field">
+                {{ form.other_it_experience|as_widget(attrs={'class': 'form-control', 'placeholder': 'Specify Other IT
+                Experience'}) }}
+            </div>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="form-group">
+            <label class="required">Email:</label>
+            {{ form.email|as_widget(attrs={'class': 'form-control'}) }}
+        </div>
+
+        <div class="form-group">
+            <label>Country Code:</label>
+            {{ form.country_code|as_widget(attrs={'class': 'form-control'}) }}
+        </div>
+
+        <div class="form-group">
+            <label>Phone:</label>
+            {{ form.phone|as_widget(attrs={'class': 'form-control'}) }}
+        </div>
+
+        <!-- Status -->
+        <div class="form-group">
+            <label>Status:</label>
+            {{ form.status|as_widget(attrs={'class': 'form-control'}) }}
+        </div>
+
+        <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+</div>
+
+<style>
+    .form-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        font-family: Arial, sans-serif;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .required:after {
+        content: " *";
+        color: red;
+    }
+
+    .other-field {
+        display: none;
+        margin-top: 10px;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        function toggleOtherField(selectId, otherFieldId) {
+            const select = document.getElementById(selectId);
+            const otherField = document.getElementById(otherFieldId);
+            if (select && otherField) {
+                select.addEventListener('change', function () {
+                    otherField.style.display = (select.value === 'Other') ? 'block' : 'none';
+                });
+            }
+        }
+
+        toggleOtherField('id_courses_to_train', 'other_courses_field');
+        toggleOtherField('id_qualifications', 'other_qualifications_field');
+        toggleOtherField('id_awards', 'other_awards_field');
+        toggleOtherField('id_it_experience', 'other_it_experience_field');
+    });
+</script>
+{% endblock %}

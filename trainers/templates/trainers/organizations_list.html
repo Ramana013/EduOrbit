@@ -1,0 +1,33 @@
+{% extends 'trainers/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+<style>
+    .container {
+        display: flex;
+    }
+
+    .org-header {
+        margin: 0;
+    }
+
+    .button {
+        margin-top: 0px;
+        margin-left: 8rem;
+    }
+
+    @media (max-width: 576px) {
+        .org-header {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
+</style>
+
+<div class="container">
+    <h4 class="org-header">Admin Home / Plan / Trainers / Organizations</h4>
+    <a href="{% url 'trainers:add_organization' %}" class="btn btn-primary button">Add Organization</a>
+</div>
+<hr>
+<p>Usage: Choose an option from the above navigation bar to get started</p>
+{% endblock %}

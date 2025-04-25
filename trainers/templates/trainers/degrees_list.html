@@ -1,0 +1,39 @@
+{% extends 'trainers/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+<style>
+    .container {
+        display: flex;
+        /* justify-content: space-between; */
+
+    }
+
+    .degree-header {
+        margin: 0;
+    }
+
+    .button {
+        margin-top: 0px;
+        margin-left: 8rem;
+
+    }
+
+    /* Optional: Add responsive behavior if needed */
+    @media (max-width: 576px) {
+        .degree-header {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
+</style>
+
+<div class="container">
+    <h4 class="degree-header">Admin Home / Plan / Trainers / Degrees</h4>
+    <a href="{% url 'trainers:add_degree' %}" class="btn btn-primary button">Add Degree</a>
+
+</div>
+<hr>
+<p>Usage: Choose an option from the above navigation bar to get started</p>
+
+{% endblock %}
