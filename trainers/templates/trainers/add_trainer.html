@@ -1,128 +1,6 @@
 {% extends 'trainers/base.html' %}
-{% load crispy_forms_tags %}
 
 {% block content %}
-<div class="form-container">
-    <h1>Trainer Information Form</h1>
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-
-        <div class="form-group">
-            <label class="required">Name:</label>
-            {{ form.name|as_widget(attrs={'class': 'form-control'}) }}
-        </div>
-
-        <div class="form-group">
-            <label class="required">Title:</label>
-            {{ form.title|as_widget(attrs={'class': 'form-control'}) }}
-        </div>
-
-        <div class="form-group">
-            <label class="required">Bio:</label>
-            {{ form.bio|as_widget(attrs={'class': 'form-control', 'rows': '4'}) }}
-        </div>
-
-        <div class="form-group">
-            <label class="required">Date of Birth:</label>
-            {{ form.dob|as_widget(attrs={'class': 'form-control', 'type': 'date'}) }}
-        </div>
-
-        <div class="form-group">
-            <label class="required">Experience (years):</label>
-            {{ form.experience|as_widget(attrs={'class': 'form-control', 'step': '0.1'}) }}
-        </div>
-
-        <div class="form-group">
-            <label>Rating (1-5):</label>
-            {{ form.rating|as_widget(attrs={'class': 'form-control', 'min': '1', 'max': '5'}) }}
-        </div>
-
-        <div class="form-group">
-            <label>Profile Picture:</label>
-            {{ form.profile_pic|as_widget(attrs={'class': 'form-control'}) }}
-        </div>
-
-        <div class="form-group">
-            <label>Prior Batches:</label>
-            {{ form.prior_batches|as_widget(attrs={'class': 'form-control'}) }}
-        </div>
-
-        <div class="form-group">
-            <label>Prior Aspirants:</label>
-            {{ form.prior_aspirants|as_widget(attrs={'class': 'form-control'}) }}
-        </div>
-
-        <div class="form-group">
-            <label>Prior Weekly Tests:</label>
-            {{ form.prior_weekly_tests|as_widget(attrs={'class': 'form-control'}) }}
-        </div>
-
-        <!-- Courses to Train -->
-        <div class="form-group">
-            <label>Courses to Train:</label>
-            {{ form.courses_to_train|as_widget(attrs={'class': 'form-control', 'id': 'id_courses_to_train'}) }}
-            <div id="other_courses_field" class="other-field">
-                {{ form.other_courses_to_train|as_widget(attrs={'class': 'form-control', 'placeholder': 'Specify Other
-                Courses'}) }}
-            </div>
-        </div>
-
-        <!-- Qualifications -->
-        <div class="form-group">
-            <label>Qualifications:</label>
-            {{ form.qualifications|as_widget(attrs={'class': 'form-control', 'id': 'id_qualifications'}) }}
-            <div id="other_qualifications_field" class="other-field">
-                {{ form.other_qualifications|as_widget(attrs={'class': 'form-control', 'placeholder': 'Specify Other
-                Qualifications'}) }}
-            </div>
-        </div>
-
-        <!-- Awards -->
-        <div class="form-group">
-            <label>Awards:</label>
-            {{ form.awards|as_widget(attrs={'class': 'form-control', 'id': 'id_awards'}) }}
-            <div id="other_awards_field" class="other-field">
-                {{ form.other_awards|as_widget(attrs={'class': 'form-control', 'placeholder': 'Specify Other Awards'})
-                }}
-            </div>
-        </div>
-
-        <!-- IT Experience -->
-        <div class="form-group">
-            <label>IT Experience:</label>
-            {{ form.it_experience|as_widget(attrs={'class': 'form-control', 'id': 'id_it_experience'}) }}
-            <div id="other_it_experience_field" class="other-field">
-                {{ form.other_it_experience|as_widget(attrs={'class': 'form-control', 'placeholder': 'Specify Other IT
-                Experience'}) }}
-            </div>
-        </div>
-
-        <!-- Contact Info -->
-        <div class="form-group">
-            <label class="required">Email:</label>
-            {{ form.email|as_widget(attrs={'class': 'form-control'}) }}
-        </div>
-
-        <div class="form-group">
-            <label>Country Code:</label>
-            {{ form.country_code|as_widget(attrs={'class': 'form-control'}) }}
-        </div>
-
-        <div class="form-group">
-            <label>Phone:</label>
-            {{ form.phone|as_widget(attrs={'class': 'form-control'}) }}
-        </div>
-
-        <!-- Status -->
-        <div class="form-group">
-            <label>Status:</label>
-            {{ form.status|as_widget(attrs={'class': 'form-control'}) }}
-        </div>
-
-        <button type="submit" class="btn btn-success">Submit</button>
-    </form>
-</div>
-
 <style>
     .form-container {
         max-width: 800px;
@@ -135,33 +13,231 @@
         margin-bottom: 15px;
     }
 
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    input[type="date"],
+    input[type="tel"],
+    textarea,
+    select {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+
     .required:after {
         content: " *";
         color: red;
     }
 
     .other-field {
-        display: none;
         margin-top: 10px;
+        display: none;
     }
 </style>
+</head>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        function toggleOtherField(selectId, otherFieldId) {
-            const select = document.getElementById(selectId);
-            const otherField = document.getElementById(otherFieldId);
-            if (select && otherField) {
+<body>
+    <div class="form-container">
+        <h1>Trainer Information Form</h1>
+        <form method="post" enctype="multipart/form-data">
+            <!-- Basic Information -->
+            <div class="form-group">
+                <label for="id_name" class="required">Name:</label>
+                <input type="text" id="id_name" name="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="id_title" class="required">Title:</label>
+                <input type="text" id="id_title" name="title" required>
+            </div>
+
+            <div class="form-group">
+                <label for="id_bio" class="required">Bio:</label>
+                <textarea id="id_bio" name="bio" rows="4" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="id_dob" class="required">Date of Birth:</label>
+                <input type="date" id="id_dob" name="dob" required>
+            </div>
+
+            <div class="form-group">
+                <label for="id_experience" class="required">Experience (years):</label>
+                <input type="number" id="id_experience" name="experience" step="0.1" required>
+            </div>
+
+            <div class="form-group">
+                <label for="id_rating">Rating (1-5):</label>
+                <input type="number" id="id_rating" name="rating" min="1" max="5">
+            </div>
+
+            <div class="form-group">
+                <label for="id_profile_pic">Profile Picture:</label>
+                <input type="file" id="id_profile_pic" name="profile_pic">
+            </div>
+
+            <!-- Prior Experience -->
+            <div class="form-group">
+                <label for="id_prior_batches">Prior Batches:</label>
+                <input type="number" id="id_prior_batches" name="prior_batches">
+            </div>
+
+            <div class="form-group">
+                <label for="id_prior_aspirants">Prior Aspirants:</label>
+                <input type="number" id="id_prior_aspirants" name="prior_aspirants">
+            </div>
+
+            <div class="form-group">
+                <label for="id_prior_weekly_tests">Prior Weekly Tests:</label>
+                <input type="number" id="id_prior_weekly_tests" name="prior_weekly_tests">
+            </div>
+
+            <!-- Courses to Train (single-select dropdown) -->
+            <div class="form-group">
+                <label for="id_courses_to_train">Courses to Train:</label>
+                <select id="id_courses_to_train" name="courses_to_train">
+                    <option value="">---------</option>
+                    <option value="Java">Java</option>
+                    <option value="Python">Python</option>
+                    <option value="Django">Django</option>
+                    <option value="Data Science">Data Science</option>
+                    <option value="Machine Learning">Machine Learning</option>
+                    <option value="Other">Other</option>
+                </select>
+                <div id="other_courses_field" class="other-field">
+                    <input type="text" id="id_other_courses_to_train" name="other_courses_to_train"
+                        placeholder="Specify Other Courses">
+                </div>
+            </div>
+
+            <!-- Qualifications (single-select dropdown) -->
+            <div class="form-group">
+                <label for="id_qualifications">Qualifications:</label>
+                <select id="id_qualifications" name="qualifications">
+                    <option value="">---------</option>
+                    <option value="Bachelor">Bachelor</option>
+                    <option value="Master">Master</option>
+                    <option value="PhD">PhD</option>
+                    <option value="Diploma">Diploma</option>
+                    <option value="Certification">Certification</option>
+                    <option value="Other">Other</option>
+                </select>
+                <div id="other_qualifications_field" class="other-field">
+                    <input type="text" id="id_other_qualifications" name="other_qualifications"
+                        placeholder="Specify Other Qualifications">
+                </div>
+            </div>
+
+            <!-- Awards -->
+            <div class="form-group">
+                <label for="id_awards">Awards:</label>
+                <select id="id_awards" name="awards">
+                    <option value="">---------</option>
+                    <option value="Best Trainer">Best Trainer</option>
+                    <option value="Employee of the Year">Employee of the Year</option>
+                    <option value="Outstanding Achievement">Outstanding Achievement</option>
+                    <option value="Certificate of Excellence">Certificate of Excellence</option>
+                    <option value="Best Performance">Best Performance</option>
+                    <option value="Other">Other</option>
+                </select>
+                <div id="other_awards_field" class="other-field">
+                    <input type="text" id="id_other_awards" name="other_awards" placeholder="Specify Other Awards">
+                </div>
+            </div>
+
+            <!-- IT Experience -->
+            <div class="form-group">
+                <label for="id_it_experience">IT Experience:</label>
+                <select id="id_it_experience" name="it_experience">
+                    <option value="">---------</option>
+                    <option value="0-1 years">0-1 years</option>
+                    <option value="1-2 years">1-2 years</option>
+                    <option value="2-3 years">2-3 years</option>
+                    <option value="3-5 years">3-5 years</option>
+                    <option value="5-7 years">5-7 years</option>
+                    <option value="7-10 years">7-10 years</option>
+                    <option value="10+ years">10+ years</option>
+                    <option value="Internship">Internship</option>
+                    <option value="Freelancer">Freelancer</option>
+                    <option value="Consultant">Consultant</option>
+                    <option value="Other">Other</option>
+                </select>
+                <div id="other_it_experience_field" class="other-field">
+                    <input type="text" id="id_other_it_experience" name="other_it_experience"
+                        placeholder="Specify Other IT Experience">
+                </div>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="form-group">
+                <label for="id_email" class="required">Email:</label>
+                <input type="email" id="id_email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="id_country_code">Country Code:</label>
+                <input type="text" id="id_country_code" name="country_code">
+            </div>
+
+            <div class="form-group">
+                <label for="id_phone">Phone:</label>
+                <input type="tel" id="id_phone" name="phone">
+            </div>
+
+            <!-- Status -->
+            <div class="form-group">
+                <label for="id_status">Status:</label>
+                <select id="id_status" name="status">
+                    <option value="Active">Active</option>
+                    <option value="Inactive">Inactive</option>
+                    <option value="On Leave">On Leave</option>
+                </select>
+            </div>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Show/hide "Other" text input based on select dropdowns
+            function handleOtherSelection(selectId, otherFieldId) {
+                const select = document.getElementById(selectId);
+                const otherField = document.getElementById(otherFieldId);
+
                 select.addEventListener('change', function () {
                     otherField.style.display = (select.value === 'Other') ? 'block' : 'none';
                 });
             }
-        }
 
-        toggleOtherField('id_courses_to_train', 'other_courses_field');
-        toggleOtherField('id_qualifications', 'other_qualifications_field');
-        toggleOtherField('id_awards', 'other_awards_field');
-        toggleOtherField('id_it_experience', 'other_it_experience_field');
-    });
-</script>
-{% endblock %}
+            handleOtherSelection('id_courses_to_train', 'other_courses_field');
+            handleOtherSelection('id_qualifications', 'other_qualifications_field');
+            handleOtherSelection('id_awards', 'other_awards_field');
+            handleOtherSelection('id_it_experience', 'other_it_experience_field');
+        });
+    </script>
+
+    {% endblock %}
